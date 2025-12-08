@@ -1,0 +1,1 @@
+Distance_methylation script has some limitations when it comes to checking spesific methylations since the plot is not proposional to the amount of sites that are methylated.

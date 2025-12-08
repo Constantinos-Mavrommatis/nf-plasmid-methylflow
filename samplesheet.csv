@@ -1,2 +1,4 @@
-﻿sample_id,plasmid_id,treatment,enzyme_conc,replicate,run_id,modbam,ref_fasta,truth_bed
-EGF_met_1,PlasmidToy,A,1x,1,toy_run,data/barcode03_aln_sorted.bam,data/EGF_met_1.fa,
+﻿sample_id,plasmid_id,treatment,mod_base,enzyme_conc,replicate,run_id,modbam,ref_fasta,truth_bed
+barcode03,Plasmid1,EcoGII,A,4,1,toy_run,data/barcode03_aln_sorted.bam,data/EGF_met_1.fa,
+barcode04,Plasmid1,Dam,A,4,1,toy_run,data/barcode04_aln_sorted.bam,data/EGF_met_1.fa
+barcode07,Plasmid1,EcoGII,A,15,1,toy_run,data/barcode07_aln_sorted.bam,data/EGF_met_1.fa

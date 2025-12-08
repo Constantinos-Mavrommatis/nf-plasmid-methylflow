@@ -1,4 +1,4 @@
-#!/usr/bin/Rscript
+#!/home/constantinos/miniconda3/envs/nf-env/bin/Rscript
 
 suppressPackageStartupMessages({
   library(optparse)
@@ -17,7 +17,8 @@ option_list <- list(
   make_option("--treatment",   type = "character", help = "Treatment",   default = NULL),
   make_option("--enzyme-conc", type = "character", help = "Enzyme conc", default = NULL),
   make_option("--replicate",   type = "character", help = "Replicate",   default = NULL),
-  make_option("--run-id",      type = "character", help = "Run ID",      default = NULL)
+  make_option("--run-id",      type = "character", help = "Run ID",      default = NULL),
+  make_option("--mod-base",    type = "character", help = "Modified base for this sample (A/C)", default = NA)
 )
 
 
@@ -37,11 +38,21 @@ replicate   <- opt$replicate
 run_id      <- opt$`run-id`
 mod_prob  <- opt$`mod-prob`
 mod_code  <- opt$`mod-code`
+mod_base_raw <- opt$`mod-base`
 
 # Ensure output directory exists
 out_dir <- dirname(out_pq)
 if (!dir.exists(out_dir)) {
   dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+}
+
+if (!is.null(mod_base_raw) && !is.na(mod_base_raw) && nzchar(mod_base_raw)) {
+  mod_base_val <- toupper(mod_base_raw)
+  if (!mod_base_val %in% c("A","C","G","T")) {
+    stop("mod-base must be one of: A, C, G, T (got: ", mod_base_raw, ")", call. = FALSE)
+  }
+} else {
+  mod_base_val <- NA_character_
 }
 
 # Core logic: collapse per read×position, then aggregate per position
@@ -84,7 +95,9 @@ df <- df %>%
     treatment   = if (!is.null(treatment))   treatment   else NA_character_,
     enzyme_conc = if (!is.null(enzyme_conc)) enzyme_conc else NA_character_,
     replicate   = if (!is.null(replicate))   replicate   else NA_character_,
-    run_id      = if (!is.null(run_id))      run_id      else NA_character_
+    run_id      = if (!is.null(run_id))      run_id      else NA_character_,
+    mod_base    = mod_base_val
+
   )
 
 

@@ -23,6 +23,7 @@ workflow {
                 sample_id   : row.sample_id,
                 plasmid_id  : row.plasmid_id,
                 treatment   : row.treatment,
+                mod_base    : row.mod_base,
                 enzyme_conc : row.enzyme_conc,
                 replicate   : row.replicate,
                 run_id      : row.run_id
@@ -142,7 +143,8 @@ process EXTRACT_COLLAPSED {
     --treatment ${meta.treatment} \
     --enzyme-conc ${meta.enzyme_conc} \
     --replicate ${meta.replicate} \
-    --run-id ${meta.run_id}
+    --run-id ${meta.run_id} \
+    --mod-base ${meta.mod_base}
     """
 }
 
@@ -171,7 +173,8 @@ process PILEUP_R {
     --treatment ${meta.treatment} \
     --enzyme-conc ${meta.enzyme_conc} \
     --replicate ${meta.replicate} \
-    --run-id ${meta.run_id}
+    --run-id ${meta.run_id} \
+    --mod-base ${meta.mod_base}
     """
 }
 
