@@ -21,3 +21,4 @@ data/
 # R / editor noise
 .Rhistory
 .Rproj.user/
+.nextflow/
