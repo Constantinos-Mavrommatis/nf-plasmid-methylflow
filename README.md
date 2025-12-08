@@ -237,12 +237,9 @@ The output tells you:
 - Runs are resumable (`-resume`) and traceable.
 - Environments can be captured with:
   - conda (`envs/nf-env.yml`), or
-  - containers (if you add Docker/Singularity definitions).
 
 ---
 
 ## Citation
 
-If you use this pipeline in your work, please consider citing the repository (and any associated dissertation or publication).
-
-You can also add a `CITATION.cff` file so GitHub shows an automatic citation block.
+MIT
