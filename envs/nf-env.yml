@@ -1,0 +1,21 @@
+name: nf-env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.11
+  - nextflow  # or install manually, up to you
+  - r-base>=4.3
+  - r-optparse
+  - r-arrow
+  - r-dplyr
+  - r-tidyr
+  - r-fs
+  - r-ggplot2
+  - r-scales
+  - r-readr
+  - bioconductor-biostrings
+  - pandas
+
+
