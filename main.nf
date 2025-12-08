@@ -5,6 +5,9 @@ if( !params.samplesheet ) params.samplesheet = 'samplesheet.csv'
 if( !params.outdir )      params.outdir      = 'results'
 if( !params.mod_prob ) params.mod_prob = 0.8
 if( !params.mod_code ) params.mod_code = 'm'
+if( !params.combine_run ) params.combine_run = true   // <-- new
+
+def outdir_abs = new File(params.outdir).getAbsolutePath()
 
 workflow {
 
@@ -55,6 +58,18 @@ workflow {
      * 4a. Convert TSV → Parquet for each sample
      */
     pileup_ch = PILEUP_R(parquet_ch)
+
+    /*
+     * 6. Optional per-run combine step
+     *    We "collect" the channels so COMBINE_RUN only runs once,
+     *    after all per-sample tasks are done.
+     */
+    if( params.combine_run ) {
+        def pileup_done_ch   = pileup_ch.collect()
+        def extract_done_ch  = collapsed_ch.collect()
+
+        COMBINE_RUN( pileup_done_ch, extract_done_ch )
+    }
 
 
 }
@@ -157,5 +172,34 @@ process PILEUP_R {
     --enzyme-conc ${meta.enzyme_conc} \
     --replicate ${meta.replicate} \
     --run-id ${meta.run_id}
+    """
+}
+
+/*
+ * Process: COMBINE_RUN
+ * Runs ONCE at the end of the workflow.
+ * For each treatment folder under ${params.outdir}:
+ *   - combine 03_extract/*.parquet → 05_combined/<treatment>_extract_combined.parquet
+ *   - combine 04_pileup/*.parquet → 05_combined/<treatment>_pileup_combined.parquet
+ */
+process COMBINE_RUN {
+
+    tag "combine_run"
+
+    input:
+    // dummy inputs just to make this run after upstream has finished
+    val pileup_meta_list
+    val extract_meta_list
+
+    output:
+    // a marker file so Nextflow knows this step ran
+    path "combine_run.done"
+
+    script:
+    """
+    combine_run.R \
+      --base-outdir ${outdir_abs}
+
+    touch combine_run.done
     """
 }
