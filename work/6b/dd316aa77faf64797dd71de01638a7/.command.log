@@ -1,5 +1,0 @@
-Usage: /home/s2748062/plasmid-methylation-qc/bin/extract_collapse.R [options]
-
-/home/s2748062/plasmid-methylation-qc/bin/extract_collapse.R: error: Error in getopt(spec = spec, opt = args) : 
-  long flag "plasmid-id" is invalid
-

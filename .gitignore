@@ -1,0 +1,23 @@
+# Nextflow work dirs & cache
+work/
+.cache/
+.nf-cache/
+.nextflow.log
+.nextflow.*
+
+# Pipeline outputs
+results/
+results*/
+
+# Local data
+data/
+*.bam
+*.bam.bai
+*.fastq
+*.fastq.gz
+*.parquet
+*.tsv
+
+# R / editor noise
+.Rhistory
+.Rproj.user/

@@ -1,5 +1,0 @@
-Running: modkit extract full barcode03_aln_sorted.bam EGF_met_1.extract_full.tsv --reference EGF_met_1.fa --mapped-only --cpg
-> specifying a motif (including --cpg) outputs only mapped sites
-> searching for 1 motifs
-> did not find index to modBAM, defaulting to serial scan
-> processed 2649 reads, 9457 rows, skipped ~2469 reads, failed ~0 reads
