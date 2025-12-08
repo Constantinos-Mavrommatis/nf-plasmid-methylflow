@@ -1,6 +1,6 @@
-# nf-plasmid-methylflow
+# nf-Plasmid-Methylflow
 
-`plasmid-methylation-qc` is a **Nextflow pipeline** for analysing and QC-ing plasmid methylation from Oxford Nanopore **modBAM** files using `modkit`.
+`Plasmid-Methylflow` is a **Nextflow pipeline** for analysing and QC-ing plasmid methylation from Oxford Nanopore **modBAM** files using `modkit`.
 
 It is designed for:
 
