@@ -1,24 +1,32 @@
-# Nextflow work dirs & cache
+# Nextflow
 work/
-.cache/
-.nf-cache/
-.nextflow.log
-.nextflow.*
-
-# Pipeline outputs
 results/
-results*/
+.nextflow*
+.cache/
+reports/
+timelines/
+trace.txt
+dag.png
 
-# Local data
+# Large / local data
 data/
+example_data/raw/
 *.bam
-*.bam.bai
+*.bai
 *.fastq
 *.fastq.gz
-*.parquet
-*.tsv
 
-# R / editor noise
+# R cruft
 .Rhistory
+.RData
 .Rproj.user/
-.nextflow/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS / editor stuff
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
