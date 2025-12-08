@@ -1,0 +1,2 @@
+﻿sample_id,plasmid_id,treatment,enzyme_conc,replicate,run_id,modbam,ref_fasta,truth_bed
+EGF_met_1,PlasmidToy,A,1x,1,toy_run,data/barcode03_aln_sorted.bam,data/EGF_met_1.fa,

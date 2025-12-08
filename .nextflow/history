@@ -1,0 +1,37 @@
+2025-12-06 17:11:25	2.3s	tender_wright	ERR	3cc1f60f7b167afcc1f2a09fe0fed641	2e0d5a81-5b7e-468e-875f-624f9f0e5056	nextflow run main.nf -profile local
+2025-12-06 17:12:34	2.5s	suspicious_shirley	ERR	3cc1f60f7b167afcc1f2a09fe0fed641	fe7ab832-ec13-4720-8d5e-fc76a6e47250	nextflow run main.nf -profile local
+2025-12-06 17:18:39	2.8s	cranky_banach	ERR	3cc1f60f7b167afcc1f2a09fe0fed641	b6fe25b3-732f-4736-bc6e-48598e8dc4ca	nextflow run main.nf -profile local
+2025-12-06 17:22:23	2s	determined_hoover	ERR	3cc1f60f7b167afcc1f2a09fe0fed641	fb96683b-a9a4-4123-856a-923b73efc484	nextflow run main.nf -profile local
+2025-12-06 17:23:38	2.3s	boring_montalcini	ERR	3cc1f60f7b167afcc1f2a09fe0fed641	fb96683b-a9a4-4123-856a-923b73efc484	nextflow run main.nf -profile local -resume
+2025-12-06 17:26:15	2.2s	ecstatic_brenner	ERR	3bdae7ba247d2cf82eea160e63103d61	fb96683b-a9a4-4123-856a-923b73efc484	nextflow run main.nf -profile local -resume
+2025-12-06 17:26:28	1.9s	infallible_faraday	ERR	3bdae7ba247d2cf82eea160e63103d61	bbadd12d-a41a-4364-83ff-741da401654e	nextflow run main.nf -profile local
+2025-12-06 17:27:45	2.6s	jolly_avogadro	ERR	3bdae7ba247d2cf82eea160e63103d61	bc32ae2b-0804-418d-9cce-e9ff7e389a93	nextflow run main.nf -profile local
+2025-12-06 17:30:56	5.2s	clever_borg	OK	e5180f19eba549ba11a1ce0320496636	fb0ee010-1253-4f0f-9d35-dd7944aabcf9	nextflow run main.nf -profile local
+2025-12-06 19:47:31	5.5s	goofy_blackwell	ERR	d826ee4f8fe04f792a82b56411689fb1	fea86111-d959-442b-81f7-e7f0f7af33f9	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-06 19:50:35	5.7s	fabulous_roentgen	ERR	d826ee4f8fe04f792a82b56411689fb1	c4705a7e-8198-48f3-81f4-39fc94096315	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-06 19:53:16	5.1s	distraught_heyrovsky	ERR	ec062921567127f3ecfe325b8cd80ee1	a25147b0-b521-4633-8b53-f4bfb2209ed7	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-06 19:54:21	6.3s	clever_bassi	OK	ec062921567127f3ecfe325b8cd80ee1	50770cf5-4169-4176-876b-b83783a017dc	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-06 20:23:23	3.2s	awesome_avogadro	ERR	0a90491086608b6c724a4935a4b37830	50770cf5-4169-4176-876b-b83783a017dc	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results -resume
+2025-12-06 20:24:57	5.6s	backstabbing_lamport	OK	89db029f588ca1e85e095419efb5595b	50770cf5-4169-4176-876b-b83783a017dc	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results -resume
+2025-12-06 23:58:40	-	sick_swartz	-	01524a46cce9d7d876ee2ca5f27809e1	50770cf5-4169-4176-876b-b83783a017dc	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results -resume
+2025-12-07 00:05:13	-	cranky_fermat	-	c76e876f0fd5ae02dbb7df6f5a2b5097	50770cf5-4169-4176-876b-b83783a017dc	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results -resume
+2025-12-07 00:06:58	-	infallible_swartz	-	5c93519f29d94c5163e0dd86c62e112d	50770cf5-4169-4176-876b-b83783a017dc	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results -resume
+2025-12-07 00:08:45	-	marvelous_austin	-	5c93519f29d94c5163e0dd86c62e112d	398394cd-62d8-4286-9c8e-9df55ecdc3fc	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 00:11:41	-	boring_archimedes	-	2a5c43e1350f25b1c08dce3cd46836c8	398394cd-62d8-4286-9c8e-9df55ecdc3fc	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results -resume
+2025-12-07 00:13:06	-	insane_keller	-	2a5c43e1350f25b1c08dce3cd46836c8	b3ff8e3c-e5dd-4706-961c-bea1841dbecb	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 11:36:00	-	amazing_plateau	-	7d0ff6b914165af3808276bc212e7581	b3ff8e3c-e5dd-4706-961c-bea1841dbecb	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results -resume
+2025-12-07 11:47:17	-	cheesy_turing	-	7bccea9e7b4537435d80293c0df2572b	b3ff8e3c-e5dd-4706-961c-bea1841dbecb	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results -resume
+2025-12-07 11:48:12	-	disturbed_ekeblad	-	7bccea9e7b4537435d80293c0df2572b	788a2588-0dcd-4183-aef7-7121984d7f53	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 11:55:06	5.6s	naughty_curry	ERR	016cb2e9b6cfe37de2ca8a86ee5d5859	ef241b65-401e-47c1-b0fc-1f6cfe6305b9	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 11:55:38	9.7s	awesome_dijkstra	OK	44cf6d60eeedb0bb2c09669b8127cf96	648a8789-d565-48c3-bb55-04fc14f3d431	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 12:02:12	-	furious_swartz	-	702b73e8bd7fb8be1669f2007c4c16a2	b0457532-3caa-4af9-ae8a-10cc710ab2c6	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 12:03:43	5.1s	fervent_planck	ERR	0ffe6965c62d5566b461723551f59282	a72a7554-1ccb-4837-8bf1-20b0da7a1d12	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 12:04:26	9.6s	shrivelled_northcutt	OK	14e3c140310a4747c57ab25438f05e04	d159bd27-db6b-4a06-bfe3-3a750a630a86	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 19:51:06	9.7s	thirsty_cuvier	OK	b1a0d16784173c3a85c6df2c4d620d58	8c857d86-4739-4de4-b2be-1193ecb86278	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 20:13:03	7.5s	curious_shaw	ERR	5a0ea231de6444ca6a40fab6dac935c3	2dd1cbe9-5ee9-4efb-8877-cec49ca60dd9	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 20:20:27	6.8s	friendly_picasso	ERR	5a0ea231de6444ca6a40fab6dac935c3	9249a79d-ee60-4b79-80ea-5e654cffc61d	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 20:21:56	6s	stupefied_shirley	ERR	5a0ea231de6444ca6a40fab6dac935c3	ad17900c-5029-4be1-a9c4-ef901514bdc5	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 20:22:46	6.6s	reverent_faraday	ERR	5a0ea231de6444ca6a40fab6dac935c3	6d7acfb0-c355-4df2-b421-6fea2f886ad8	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 20:23:12	7.6s	trusting_ekeblad	ERR	5a0ea231de6444ca6a40fab6dac935c3	5a35010a-240b-45b3-9f6a-a87ebdfecc56	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+2025-12-07 20:26:02	7.6s	insane_hodgkin	ERR	5a0ea231de6444ca6a40fab6dac935c3	2e792504-18ab-48b0-8907-a6192e30d356	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results --resume
+2025-12-07 20:30:47	9.6s	pedantic_newton	OK	5a0ea231de6444ca6a40fab6dac935c3	39696fcd-0a96-4121-a9ae-60fddf8ae549	nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results --resume

@@ -1,0 +1,5 @@
+Usage: /home/s2748062/plasmid-methylation-qc/bin/pileup_one.R [options]
+
+/home/s2748062/plasmid-methylation-qc/bin/pileup_one.R: error: Error in getopt(spec = spec, opt = args) : 
+  long flag "mod-prob" is invalid
+

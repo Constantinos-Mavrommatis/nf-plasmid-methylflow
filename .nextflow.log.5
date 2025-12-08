@@ -1,0 +1,113 @@
+Dec-07 20:20:27.019 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf -profile local --samplesheet samplesheet.csv --outdir results
+Dec-07 20:20:27.163 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.10.2
+Dec-07 20:20:27.190 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/s2748062/.nextflow/plugins; core-plugins: nf-amazon@3.4.2,nf-azure@1.20.2,nf-cloudcache@0.5.0,nf-codecommit@0.5.0,nf-console@1.3.0,nf-google@1.23.3,nf-k8s@1.2.2,nf-tower@1.17.3,nf-wave@1.16.1
+Dec-07 20:20:27.227 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Dec-07 20:20:27.228 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Dec-07 20:20:27.231 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Dec-07 20:20:27.251 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+Dec-07 20:20:27.454 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Dec-07 20:20:27.570 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Dec-07 20:20:27.571 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Dec-07 20:20:27.589 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/s2748062/.nextflow/secrets/store.json
+Dec-07 20:20:27.601 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@58b67519] - activable => nextflow.secret.LocalSecretsProvider@58b67519
+Dec-07 20:20:27.604 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Dec-07 20:20:27.624 [main] DEBUG nextflow.cli.CmdRun - Launching `main.nf` [friendly_picasso] DSL2 - revision: 5a0ea231de
+Dec-07 20:20:27.697 [main] DEBUG nextflow.Session - Session UUID: 9249a79d-ee60-4b79-80ea-5e654cffc61d
+Dec-07 20:20:27.697 [main] DEBUG nextflow.Session - Run name: friendly_picasso
+Dec-07 20:20:27.698 [main] DEBUG nextflow.Session - Executor pool size: 64
+Dec-07 20:20:27.709 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Dec-07 20:20:27.717 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=192; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Dec-07 20:20:27.748 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.10.2 build 10555
+  Created: 28-11-2025 19:24 UTC (19:24 BST)
+  System: Linux 5.15.0-138-generic
+  Runtime: Groovy 4.0.28 on OpenJDK 64-Bit Server VM 21.0.6+9-b895.97
+  Encoding: UTF-8 (UTF-8)
+  Process: 2693170@bioinfmsc6 [129.215.237.37]
+  CPUs: 64 - Mem: 251.8 GB (67.7 GB) - Swap: 8 GB (7.9 GB)
+Dec-07 20:20:27.773 [main] DEBUG nextflow.Session - Work-dir: /home/s2748062/plasmid-methylation-qc/work [ext2/ext3]
+Dec-07 20:20:27.819 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Dec-07 20:20:27.831 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Dec-07 20:20:27.835 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+Dec-07 20:20:27.900 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Dec-07 20:20:27.913 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 65; maxThreads: 1000
+Dec-07 20:20:27.982 [main] DEBUG nextflow.Session - Session start
+Dec-07 20:20:29.013 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Dec-07 20:20:29.024 [main] WARN  nextflow.script.ScriptBinding - Access to undefined parameter `mod_prob` -- Initialise it to a default value eg. `params.mod_prob = some_value`
+Dec-07 20:20:29.026 [main] WARN  nextflow.script.ScriptBinding - Access to undefined parameter `mod_code` -- Initialise it to a default value eg. `params.mod_code = some_value`
+Dec-07 20:20:29.306 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Dec-07 20:20:29.307 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Dec-07 20:20:29.320 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Dec-07 20:20:29.331 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=64; memory=251.8 GB; capacity=64; pollInterval=100ms; dumpInterval=5m
+Dec-07 20:20:29.334 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Dec-07 20:20:29.404 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'EXTRACT_FULL': maxForks=0; fair=false; array=0
+Dec-07 20:20:29.458 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Dec-07 20:20:29.459 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Dec-07 20:20:29.460 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'TSV_TO_PARQUET': maxForks=0; fair=false; array=0
+Dec-07 20:20:29.465 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Dec-07 20:20:29.465 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Dec-07 20:20:29.466 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'EXTRACT_COLLAPSED': maxForks=0; fair=false; array=0
+Dec-07 20:20:29.470 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Dec-07 20:20:29.471 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Dec-07 20:20:29.472 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'PILEUP_R': maxForks=0; fair=false; array=0
+Dec-07 20:20:29.477 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: TSV_TO_PARQUET, EXTRACT_COLLAPSED, EXTRACT_FULL, PILEUP_R
+Dec-07 20:20:29.480 [main] DEBUG nextflow.Session - Igniting dataflow network (5)
+Dec-07 20:20:29.487 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > EXTRACT_FULL
+Dec-07 20:20:29.487 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > TSV_TO_PARQUET
+Dec-07 20:20:29.487 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > EXTRACT_COLLAPSED
+Dec-07 20:20:29.488 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > PILEUP_R
+Dec-07 20:20:29.488 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_1090d06d6ff799c5: /home/s2748062/plasmid-methylation-qc/main.nf
+Dec-07 20:20:29.489 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Dec-07 20:20:29.489 [main] DEBUG nextflow.Session - Session await
+Dec-07 20:20:29.753 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Dec-07 20:20:29.757 [Task submitter] INFO  nextflow.Session - [a4/3c5e52] Submitted process > EXTRACT_FULL (EGF_met_1)
+Dec-07 20:20:32.300 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: EXTRACT_FULL (EGF_met_1); status: COMPLETED; exit: 0; error: -; workDir: /home/s2748062/plasmid-methylation-qc/work/a4/3c5e52683b25fd47c19d880359ff6e]
+Dec-07 20:20:32.301 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=192; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Dec-07 20:20:32.346 [TaskFinalizer-1] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=192; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Dec-07 20:20:32.348 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Dec-07 20:20:32.348 [Task submitter] INFO  nextflow.Session - [92/e5b8ea] Submitted process > TSV_TO_PARQUET (EGF_met_1)
+Dec-07 20:20:33.473 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: TSV_TO_PARQUET (EGF_met_1); status: COMPLETED; exit: 0; error: -; workDir: /home/s2748062/plasmid-methylation-qc/work/92/e5b8ea8fea59161d7c4b4e37405537]
+Dec-07 20:20:33.497 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Dec-07 20:20:33.497 [Task submitter] INFO  nextflow.Session - [34/e5c104] Submitted process > EXTRACT_COLLAPSED (EGF_met_1)
+Dec-07 20:20:33.524 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Dec-07 20:20:33.525 [Task submitter] INFO  nextflow.Session - [05/41c1ef] Submitted process > PILEUP_R (EGF_met_1)
+Dec-07 20:20:33.567 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: EXTRACT_COLLAPSED (EGF_met_1); status: COMPLETED; exit: 126; error: -; workDir: /home/s2748062/plasmid-methylation-qc/work/34/e5c1048ad6f397f902961fb58e64f3]
+Dec-07 20:20:33.573 [TaskFinalizer-3] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=EXTRACT_COLLAPSED (EGF_met_1); work-dir=/home/s2748062/plasmid-methylation-qc/work/34/e5c1048ad6f397f902961fb58e64f3
+  error [nextflow.exception.ProcessFailedException]: Process `EXTRACT_COLLAPSED (EGF_met_1)` terminated with an error exit status (126)
+Dec-07 20:20:33.596 [TaskFinalizer-3] ERROR nextflow.processor.TaskProcessor - Error executing process > 'EXTRACT_COLLAPSED (EGF_met_1)'
+
+Caused by:
+  Process `EXTRACT_COLLAPSED (EGF_met_1)` terminated with an error exit status (126)
+
+
+Command executed:
+
+  extract_collapse.R     --in-parquet EGF_met_1.parquet     --out-parquet EGF_met_1.extract_collapsed.parquet     --sample-id EGF_met_1     --plasmid-id PlasmidToy     --treatment A     --enzyme-conc 1x     --replicate 1     --run-id toy_run
+
+Command exit status:
+  126
+
+Command output:
+  (empty)
+
+Command error:
+  .command.sh: line 2: /home/s2748062/plasmid-methylation-qc/bin/extract_collapse.R: Permission denied
+
+Work dir:
+  /home/s2748062/plasmid-methylation-qc/work/34/e5c1048ad6f397f902961fb58e64f3
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+Dec-07 20:20:33.601 [TaskFinalizer-3] DEBUG nextflow.Session - Session aborted -- Cause: Process `EXTRACT_COLLAPSED (EGF_met_1)` terminated with an error exit status (126)
+Dec-07 20:20:33.616 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Dec-07 20:20:33.623 [TaskFinalizer-3] WARN  n.processor.TaskPollingMonitor - Killing running tasks (1)
+Dec-07 20:20:33.630 [TaskFinalizer-3] DEBUG n.executor.local.LocalTaskHandler - Unable to kill PILEUP_R (EGF_met_1) -- command: kill -TERM 2693575; exit: 1 
+ bash: line 1: kill: (2693575) - No such process
+
+Dec-07 20:20:33.638 [TaskFinalizer-3] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=2; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=1; succeedDuration=3.6s; failedDuration=53ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+Dec-07 20:20:33.809 [main] DEBUG nextflow.Session - Session await > all processes finished
+Dec-07 20:20:33.809 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Dec-07 20:20:33.813 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=2; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=1; succeedDuration=3.6s; failedDuration=53ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+Dec-07 20:20:33.822 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Dec-07 20:20:33.848 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
