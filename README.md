@@ -40,7 +40,7 @@ Optionally, create a conda env:
 ```bash
 conda env create -f envs/nf-env.yml
 conda activate nf-env
-
+```
 ## Samplesheet
 
 Input samples are defined via a CSV:
