@@ -1,0 +1,55 @@
+digraph "flowchart" {
+rankdir=TB;
+v0 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+v1 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="splitCsv"];
+v0 -> v1;
+
+v1 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="splitCsv"];
+v2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v1 -> v2;
+
+v2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v3 [label="EXTRACT_FULL"];
+v2 -> v3 [label="sample_ch"];
+
+v3 [label="EXTRACT_FULL"];
+v4 [label="TSV_TO_PARQUET"];
+v3 -> v4;
+
+v4 [label="TSV_TO_PARQUET"];
+v5 [label="EXTRACT_COLLAPSED"];
+v4 -> v5;
+
+v5 [label="EXTRACT_COLLAPSED"];
+v8 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v5 -> v8;
+
+v4 [label="TSV_TO_PARQUET"];
+v6 [label="PILEUP_R"];
+v4 -> v6;
+
+v6 [label="PILEUP_R"];
+v7 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v6 -> v7;
+
+v7 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v9 [label="COMBINE_RUN"];
+v7 -> v9;
+
+v8 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v9 [label="COMBINE_RUN"];
+v8 -> v9;
+
+v9 [label="COMBINE_RUN"];
+v10 [shape=point];
+v9 -> v10;
+
+v6 [label="PILEUP_R"];
+v11 [label="DISTANCE_KMER_MOTIF"];
+v6 -> v11;
+
+v11 [label="DISTANCE_KMER_MOTIF"];
+v12 [shape=point];
+v11 -> v12;
+
+}

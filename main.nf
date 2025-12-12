@@ -1,11 +1,19 @@
 nextflow.enable.dsl = 2
 
-// ✅ Define parameter defaults without reading them first
+// Define parameter defaults without reading them first
 if( !params.samplesheet ) params.samplesheet = 'samplesheet.csv'
 if( !params.outdir )      params.outdir      = 'results'
 if( !params.mod_prob ) params.mod_prob = 0.8
-if( !params.mod_code ) params.mod_code = 'm'
-if( !params.combine_run ) params.combine_run = true   // <-- new
+if( !params.mod_code ) params.mod_code = 'a'
+if( !params.combine_run ) params.combine_run = true
+
+// New params for distance analysis
+if( !params.do_distance ) params.do_distance = false
+if( !params.call_thr )    params.call_thr    = 0.7
+if( !params.max_d )       params.max_d       = 25
+if( !params.min_cov )     params.min_cov     = 250
+
+include { DISTANCE_KMER_MOTIF } from './modules/distance_kmer_motif.nf'
 
 def outdir_abs = new File(params.outdir).getAbsolutePath()
 
@@ -72,6 +80,10 @@ workflow {
         COMBINE_RUN( pileup_done_ch, extract_done_ch )
     }
 
+    // 7. OPTIONAL: run distance QC per sample, if requested
+    if( params.do_distance ) {
+        distance_ch = DISTANCE_KMER_MOTIF(pileup_ch)
+    }
 
 }
 
@@ -95,8 +107,7 @@ process EXTRACT_FULL {
     modkit_extract_full.py \
       --in-bam ${modbam} \
       --ref ${ref} \
-      --out-tsv ${meta.sample_id}.extract_full.tsv \
-      --cpg
+      --out-tsv ${meta.sample_id}.extract_full.tsv
     """
 }
 
