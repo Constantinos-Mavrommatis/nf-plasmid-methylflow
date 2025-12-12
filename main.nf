@@ -3,7 +3,7 @@ nextflow.enable.dsl = 2
 // Define parameter defaults without reading them first
 if( !params.samplesheet ) params.samplesheet = 'samplesheet.csv'
 if( !params.outdir )      params.outdir      = 'results'
-if( !params.mod_prob ) params.mod_prob = 0.8
+if( !params.mod_prob ) params.mod_prob = 0.5
 if( !params.mod_code ) params.mod_code = 'a'
 if( !params.combine_run ) params.combine_run = true
 
@@ -162,7 +162,7 @@ process EXTRACT_COLLAPSED {
 process PILEUP_R {
 
     tag "${meta.sample_id}"
-    publishDir "${params.outdir}/${meta.treatment}/04_pileup", mode: 'copy'
+    publishDir "${params.outdir}/${meta.treatment}/04_pileup/${params.mod_prob}_modification_threshold/", mode: 'copy'
 
     input:
     // matches the output of TSV_TO_PARQUET: (meta, <per-read.parquet>, ref)
@@ -170,13 +170,13 @@ process PILEUP_R {
 
     output:
     // carry meta + ref forward with a pileup Parquet
-    tuple val(meta), path("${meta.sample_id}.pileup.parquet"), path(ref)
+    tuple val(meta), path("${meta.sample_id}_${params.mod_prob}.pileup.parquet"), path(ref)
 
     script:
     """
     pileup_one.R \
     --in-parquet ${parquet} \
-    --out-parquet ${meta.sample_id}.pileup.parquet \
+    --out-parquet ${meta.sample_id}_${params.mod_prob}.pileup.parquet \
     --mod-prob ${params.mod_prob} \
     --mod-code ${params.mod_code} \
     --sample-id ${meta.sample_id} \

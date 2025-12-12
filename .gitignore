@@ -7,6 +7,9 @@ reports/
 timelines/
 trace.txt
 dag.png
+report.html
+timeline.html
+flowchart.dot
 
 # Large / local data
 data/

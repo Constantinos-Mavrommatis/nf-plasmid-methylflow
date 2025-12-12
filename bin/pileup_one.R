@@ -96,7 +96,8 @@ df <- df %>%
     enzyme_conc = if (!is.null(enzyme_conc)) enzyme_conc else NA_character_,
     replicate   = if (!is.null(replicate))   replicate   else NA_character_,
     run_id      = if (!is.null(run_id))      run_id      else NA_character_,
-    mod_base    = mod_base_val
+    mod_base    = mod_base_val,
+    prob_threshold = mod_prob
 
   )
 

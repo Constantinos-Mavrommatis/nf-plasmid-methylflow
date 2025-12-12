@@ -47,34 +47,53 @@ for (t_dir in treatment_dirs) {
   combined_dir <- fs::path(t_dir, "05_combined")
 
   dir.create(combined_dir, recursive = TRUE, showWarnings = FALSE)
-
+  
   ## 1) Combine pileup for this treatment
-  if (dir_exists(pileup_dir)) {
-    pileup_files <- fs::dir_ls(pileup_dir, glob = "*.parquet")
+  if (fs::dir_exists(pileup_dir)) {
 
-    if (length(pileup_files) > 0) {
-      message("  Combining pileup files from: ", pileup_dir)
-      pileup_ds <- arrow::open_dataset(pileup_files, format = "parquet")
-      combined_pileup <- pileup_ds %>% dplyr::collect()
+    # List subdirectories inside pileup_dir, e.g. prob_0.7, prob_0.8, ...
+    threshold_dirs <- fs::dir_ls(pileup_dir, type = "directory")
 
-      out_pileup <- fs::path(combined_dir, paste0(treatment, "_pileup_combined.parquet"))
+    for (threshold_dir in threshold_dirs) {
 
-      arrow::write_parquet(
-        combined_pileup,
-        out_pileup,
-        compression = "zstd"
-      )
+      threshold <- fs::path_file(threshold_dir)  # e.g. "prob_0.7"
 
-      cat("  Wrote combined pileup:", out_pileup, "\n")
-    } else {
-      message("  No pileup .parquet files found in ", pileup_dir)
+      # All parquet files for this threshold
+      pileup_files <- fs::dir_ls(threshold_dir, glob = "*.parquet")
+
+      if (length(pileup_files) > 0) {
+
+        message("  Combining pileup files from: ", threshold_dir)
+
+        pileup_ds <- arrow::open_dataset(pileup_files, format = "parquet")
+        combined_pileup <- pileup_ds %>% dplyr::collect()
+
+        # e.g. <combined_dir>/Dam_prob_0.7_pileup_combined.parquet
+        out_pileup <- fs::path(
+          combined_dir,
+          paste0(treatment, "_", threshold, "_pileup_combined.parquet")
+        )
+
+        arrow::write_parquet(
+          combined_pileup,
+          out_pileup,
+          compression = "zstd"
+        )
+
+        cat("  Wrote combined pileup:", out_pileup, "\n")
+
+      } else {
+        message("  No pileup .parquet files found in ", threshold_dir)
+      }
     }
+
   } else {
     message("  Pileup dir does not exist for treatment ", treatment, ": ", pileup_dir)
   }
 
+
   ## 2) Combine extract_collapsed for this treatment
-  if (dir_exists(extract_dir)) {
+  if (fs::dir_exists(extract_dir)) {
     extract_files <- fs::dir_ls(extract_dir, glob = "*.parquet")
 
     if (length(extract_files) > 0) {
@@ -82,7 +101,10 @@ for (t_dir in treatment_dirs) {
       extract_ds <- arrow::open_dataset(extract_files, format = "parquet")
       combined_extract <- extract_ds %>% dplyr::collect()
 
-      out_extract <- fs::path(combined_dir, paste0(treatment, "_extract_combined.parquet"))
+      out_extract <- fs::path(
+        combined_dir,
+        paste0(treatment, "_extract_combined.parquet")
+      )
 
       arrow::write_parquet(
         combined_extract,
@@ -97,4 +119,5 @@ for (t_dir in treatment_dirs) {
   } else {
     message("  Extract dir does not exist for treatment ", treatment, ": ", extract_dir)
   }
+  
 }
