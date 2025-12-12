@@ -1,5 +1,7 @@
 # nf-Plasmid-Methylflow
 
+> 🚧 Work in progress: refactoring the initial project to Nextflow.
+
 `Plasmid-Methylflow` is a **Nextflow pipeline** for analysing and QC-ing plasmid methylation from Oxford Nanopore **modBAM** files using `modkit`.
 
 It is designed for:
