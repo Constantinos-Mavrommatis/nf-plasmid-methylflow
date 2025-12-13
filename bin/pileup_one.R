@@ -9,7 +9,7 @@ suppressPackageStartupMessages({
 
 option_list <- list(
   make_option("--mod-prob",type = "double", default = 0.8, help = "Probability threshold for modification calls"),
-  make_option("--mod-code",type = "character",default = "m",help = "Modification code of interest (e.g. 'm' for 5mC)"),
+  make_option("--mod-code",type = "character", default = "m",help = "Modification code of interest (e.g. 'm' for 5mC)"),
   make_option("--in-parquet",  type = "character", help = "Input Parquet file"),
   make_option("--out-parquet", type = "character", help = "Output Parquet file"),
   make_option("--sample-id",   type = "character", help = "Sample ID",   default = NULL),
@@ -37,7 +37,7 @@ enzyme_conc <- opt$`enzyme-conc`
 replicate   <- opt$replicate
 run_id      <- opt$`run-id`
 mod_prob  <- opt$`mod-prob`
-mod_code  <- opt$`mod-code`
+target_code  <- opt$`mod-code`
 mod_base_raw <- opt$`mod-base`
 
 # Ensure output directory exists
@@ -73,15 +73,14 @@ df <- arrow::read_parquet(in_pq) %>%
   dplyr::distinct() %>%
   dplyr::group_by(read_id, ref_position) %>%
   dplyr::slice_max(order_by = prob, n = 1, with_ties = FALSE) %>%
-  # Same logic as your original: only enforce threshold for the mod code "m"
-  # (we could generalise to mod_code, but we keep semantics identical)
-  dplyr::filter(mod_code != "m" | prob >= mod_prob) %>%
+  # Same logic as your original: only enforce threshold for the mod code
+  dplyr::filter(prob >= mod_prob) %>%
   # Now aggregate to site level
   dplyr::group_by(ref_position, ref_strand, ref_kmer) %>%
   dplyr::summarise(
-    Nmod              = sum(mod_code == mod_code),
+    Nmod              = sum(mod_code == target_code),
     Ncanonical        = sum(mod_code == "-"),
-    Nother_mod        = sum(mod_code != mod_code & mod_code != "-"),
+    Nother_mod        = sum(mod_code != target_code & mod_code != "-"),
     Nvalid_cov        = Nmod + Ncanonical + Nother_mod,
     fraction_modified = Nmod / Nvalid_cov,
     .groups           = "drop"
