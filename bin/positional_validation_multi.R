@@ -7,6 +7,7 @@ suppressPackageStartupMessages({
   library(readr)
   library(ggplot2)
   library(scales)
+  library(ggrepel)
 })
 
 option_list <- list(
@@ -80,24 +81,24 @@ if (nrow(df) == 0L) {
 
 ## 3. Compute TP, FN, total_reads per sample & prob_threshold
 metrics_meth <- df %>%
-  filter(truth_status == "methylated") %>%
+  filter(truth_status == "Methylated") %>%
   group_by(sample_id, prob_threshold, ref_position) %>%
   summarise(
     TP          = sum(Nmod),                               # called mod at mod sites
     FN          = sum(Ncanonical + Nother_mod),            # anything not mod
     total_reads = sum(Nmod + Ncanonical + Nother_mod),
-    truth_status = "methylated",
+    truth_status = "Methylated",
     .groups     = "drop"
   )
-print(metrics_meth)
+
 metrics_can <- df %>%
-  filter(truth_status == "canonical") %>%
+  filter(truth_status == "Canonical") %>%
   group_by(sample_id, prob_threshold, ref_position) %>%
   summarise(
     TP          = sum(Ncanonical),                         # called canonical at canonical sites
     FN          = sum(Nmod + Nother_mod),                  # called modified at canonical sites
     total_reads = sum(Nmod + Ncanonical + Nother_mod),
-    truth_status = "canonical",
+    truth_status = "Canonical",
     .groups     = "drop"
   )
 
@@ -129,24 +130,28 @@ readr::write_tsv(metrics2, out_tsv)
 cat("Wrote metrics to:", out_tsv, "\n")
 
 ## 6. Plot recall vs retained_fraction
-p <- ggplot(metrics2,
-            aes(x = retained_fraction,
-                y = recall,
-                color = factor(prob_threshold),
-                group = factor(prob_threshold))) +
-  geom_point() +
-  geom_line() +
-  facet_wrap(~ sample_id) +
+p <- ggplot(
+  metrics2,
+  aes(
+    x = retained_fraction,
+    y = recall,
+    color = factor(prob_threshold),
+    group = interaction(ref_position, truth_status),
+    label = ref_position
+  )
+) +
+  geom_point(alpha = 0.7) +
+  geom_text_repel(size = 2.5, max.overlaps = 25) +
+  facet_grid(truth_status ~ sample_id) +
   scale_x_continuous(limits = c(0, 1)) +
   scale_y_continuous(limits = c(0, 1)) +
   labs(
-    title = "Recall vs retained fraction at validated methylated positions",
-    x = "Retained fraction of reads at truth positions\n(total_reads / max total_reads across thresholds)",
-    y = "Recall (TP / (TP + FN))",
-    color = "prob threshold"
+    title = "Per-Position Recall vs Retained Fraction at Validated Positions",
+    x = "Retained Fraction of Reads",
+    y = "Recall",
+    color = "Prob Threshold"
   ) +
   theme_bw()
 
 ggsave(out_plot, p, width = 8, height = 6)
 cat("Wrote plot to:", out_plot, "\n")
-
