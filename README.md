@@ -68,7 +68,7 @@ The pipeline wraps a series of steps around `modkit` + R analysis:
      - a combined **collapsed-per-read** file.
 
 6. **Optional downstream QC**
-   - `distance_motif_methylation.R`  
+   - `distance_kmer_motif.R`  
      - **motif-based** distance vs methylation (e.g. GGATCC, CG, CCWGG), counting:
        - total motif sites on the plasmid,
        - how many are covered,
@@ -160,7 +160,7 @@ barcode04,Plasmid1,Dam,A,4,1,toy_run,data/barcode04_aln_sorted.bam,data/EGF_met_
 Run the pipeline:
 
 ```bash
-nextflow run main.nf   --samplesheet samplesheet.csv   --outdir results   -profile local
+nextflow run main.nf   --samplesheet samplesheet.csv   --outdir results --do_distance true  -profile local
 ```
 
 Outputs (`--outdir results`) are grouped by `treatment`, for example:
@@ -173,12 +173,14 @@ results/
     03_extract/              # collapsed per-read calls
     04_pileup/               # site-level pileups
     05_combined/             # combined per-treatment files
+    06_distance              # kmer methylation distance 
   Dam/
     01_extract_full/
     02_parquet/
     03_extract/
     04_pileup/
     05_combined/
+    06_distance
   ...
 ```
 
@@ -186,31 +188,6 @@ This layout is friendly for:
 
 - routine **QC** (check each treatment/plasmid),
 - and later **aggregation** across treatments or runs.
-
----
-
-## Example motif-based QC
-
-For a given treatment, you can run motif-based distance QC.  
-Example for EcoGII (motif `A`, modified base index `1`):
-
-```bash
-bin/distance_motif_methylation.R   --in-parquet results/EcoGII/05_combined/EcoGII_pileup_combined.parquet   --ref-fasta  data/EGF_met_1.fa   --motif      A   --mod-index  1   --out-tsv    results/EcoGII/06_distance/EcoGII_motif_distance.tsv   --out-plot   results/EcoGII/06_distance/EcoGII_motif_distance.pdf   --call-thr   0.70   --max-d      25   --min-cov    250
-```
-
-For other methylases:
-
-- **BamHI** – motif `GGATCC`, modified A at index 3  
-- **CpG** – motif `CG`, modified C at index 1  
-- **Dam** – motif `GATC`, modified A at index 2  
-- **Dcm** – motif `CCWGG`, modified second C (`mod-index = 2`)
-
-The output tells you:
-
-- how many motif sites exist on the plasmid (total possible),  
-- how many are covered,  
-- how many are methylated,  
-- and how methylation depends on motif spacing.
 
 ---
 
