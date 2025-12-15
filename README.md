@@ -29,15 +29,15 @@ This project started as a collection of Python and R scripts. Nextflow turns tha
 
 - ✅ **Flexible execution**  
   You can run the same workflow:
-  - on a laptop (via WSL2 or Linux),
-  - on a lab server,
-  - or on an HPC/cluster with a different Nextflow profile.
+  - on a laptop (via WSL2 or Linux)
+  - on a lab server
+  - or on an HPC/cluster with a different Nextflow profile
 
 - ✅ **Separation of concerns**  
   The pipeline logic (in `main.nf`) is separate from:
-  - the analysis scripts (`bin/`),
-  - the environment (`envs/`),
-  - and configuration (`nextflow.config` / profiles).
+  - the analysis scripts (`bin/`)
+  - the environment (`envs/`)
+  - and configuration (`nextflow.config` / profiles)
 
 In short: **Nextflow makes this usable as a day-to-day QC tool and as a research pipeline that can grow with your experiments**.
 
@@ -51,7 +51,7 @@ The pipeline wraps a series of steps around `modkit` + R analysis:
    - `modkit extract full` → per-read modification TSV
 
 2. **TSV → Parquet**  
-   - Faster loading and more efficient storage for downstream analysis.
+   - Faster loading and more efficient storage for downstream analysis
 
 3. **Per-read collapse**  
    - Collapse per-read calls to **one call per (read × position)**.  
@@ -67,9 +67,7 @@ The pipeline wraps a series of steps around `modkit` + R analysis:
      - a combined **pileup** file, and  
      - a combined **collapsed-per-read** file.
 
-6. **Optional downstream QC**  
-   - `distance_methylation.R`  
-     - distance vs methylation for a chosen modified base (A/C/G/T), using `mod_base` metadata.
+6. **Optional downstream QC**
    - `distance_motif_methylation.R`  
      - **motif-based** distance vs methylation (e.g. GGATCC, CG, CCWGG), counting:
        - total motif sites on the plasmid,
@@ -96,7 +94,6 @@ This makes it useful both as:
 - Optional **per-run combine** step:
   - per-sample Parquets → combined per-treatment Parquets.
 - Extra QC / analysis scripts:
-  - `distance_methylation.R`: base-level spacing vs methylation.
   - `distance_motif_methylation.R`: **motif-level** spacing vs methylation (e.g. out of 10 possible sites, 8 methylated).
 
 ---
