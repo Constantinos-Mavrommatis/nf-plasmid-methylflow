@@ -10,6 +10,8 @@ dag.png
 report.html
 timeline.html
 flowchart.dot
+results*/
+positional*
 
 # Large / local data
 data/

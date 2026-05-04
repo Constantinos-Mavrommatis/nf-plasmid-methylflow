@@ -12,10 +12,11 @@ dependencies:
   - r-dplyr
   - r-tidyr
   - r-fs
+  - r-vroom
   - r-ggplot2
+  - r-ggrepel
   - r-scales
   - r-readr
   - bioconductor-biostrings
   - pandas
-
 

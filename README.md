@@ -67,12 +67,14 @@ The pipeline wraps a series of steps around `modkit` + R analysis:
      - a combined **pileup** file, and  
      - a combined **collapsed-per-read** file.
 
-6. **Optional downstream QC**
-   - `distance_kmer_motif.R`  
+6. **Optional downstream QC**  
+   - `distance_methylation.R`  
+     - distance vs methylation for a chosen modified base (A/C/G/T), using `mod_base` metadata.
+   - `distance_motif_methylation.R`  
      - **motif-based** distance vs methylation (e.g. GGATCC, CG, CCWGG), counting:
        - total motif sites on the plasmid,
        - how many are covered,
-       - how many are methylated.
+       - how many pass the methylation threshold.
 
 This makes it useful both as:
 
@@ -94,6 +96,7 @@ This makes it useful both as:
 - Optional **per-run combine** step:
   - per-sample Parquets → combined per-treatment Parquets.
 - Extra QC / analysis scripts:
+  - `distance_methylation.R`: base-level spacing vs methylation.
   - `distance_motif_methylation.R`: **motif-level** spacing vs methylation (e.g. out of 10 possible sites, 8 methylated).
 
 ---
@@ -114,8 +117,10 @@ This makes it useful both as:
   - `tidyr`
   - `fs`
   - `ggplot2`
+  - `ggrepel`
   - `scales`
   - `readr`
+  - `vroom`
   - `Biostrings`
 
 You will also need `modkit` and a basecaller that produces **modBAMs** (e.g. Dorado).
@@ -188,6 +193,31 @@ This layout is friendly for:
 
 - routine **QC** (check each treatment/plasmid),
 - and later **aggregation** across treatments or runs.
+
+---
+
+## Example motif-based QC
+
+For a given treatment, you can run motif-based distance QC.  
+Example for EcoGII (motif `A`, modified base index `1`):
+
+```bash
+bin/distance_motif_methylation.R   --in-parquet results/EcoGII/05_combined/EcoGII_pileup_combined.parquet   --ref-fasta  data/EGF_met_1.fa   --motif      A   --mod-index  1   --out-tsv    results/EcoGII/06_distance/EcoGII_motif_distance.tsv   --out-plot   results/EcoGII/06_distance/EcoGII_motif_distance.pdf   --call-thr   0.70   --max-d      25   --min-cov    250
+```
+
+For other methylases:
+
+- **BamHI** – motif `GGATCC`, modified A at index 3  
+- **CpG** – motif `CG`, modified C at index 1  
+- **Dam** – motif `GATC`, modified A at index 2  
+- **Dcm** – motif `CCWGG`, modified second C (`mod-index = 2`)
+
+The output tells you:
+
+- how many motif sites exist on the plasmid (total possible),  
+- how many are covered,  
+- how many are methylated,  
+- and how methylation depends on motif spacing.
 
 ---
 

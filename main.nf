@@ -1,17 +1,17 @@
 nextflow.enable.dsl = 2
 
-// Define parameter defaults without reading them first
-if( !params.samplesheet ) params.samplesheet = 'samplesheet.csv'
-if( !params.outdir )      params.outdir      = 'results'
-if( !params.mod_prob ) params.mod_prob = 0.5
-if( !params.mod_code ) params.mod_code = 'a'
-if( !params.combine_run ) params.combine_run = true
+// Define parameter defaults without clobbering explicit false/zero values
+if( params.samplesheet == null ) params.samplesheet = 'samplesheet.csv'
+if( params.outdir == null )      params.outdir      = 'results'
+if( params.mod_prob == null )    params.mod_prob    = 0.5
+if( params.mod_code == null )    params.mod_code    = 'a'
+if( params.combine_run == null ) params.combine_run = true
 
-// New params for distance analysis
-if( !params.do_distance ) params.do_distance = false
-if( !params.call_thr )    params.call_thr    = 0.7
-if( !params.max_d )       params.max_d       = 25
-if( !params.min_cov )     params.min_cov     = 250
+// Optional distance analysis
+if( params.do_distance == null ) params.do_distance = false
+if( params.call_thr == null )    params.call_thr    = 0.7
+if( params.max_d == null )       params.max_d       = 25
+if( params.min_cov == null )     params.min_cov     = 250
 
 include { DISTANCE_KMER_MOTIF } from './modules/distance_kmer_motif.nf'
 
@@ -74,10 +74,14 @@ workflow {
      *    after all per-sample tasks are done.
      */
     if( params.combine_run ) {
-        def pileup_done_ch   = pileup_ch.collect()
-        def extract_done_ch  = collapsed_ch.collect()
+        def pileup_files_ch  = pileup_ch
+            .map { meta, pileup, ref -> pileup }
+            .collect()
+        def extract_files_ch = collapsed_ch
+            .map { meta, parquet, ref -> parquet }
+            .collect()
 
-        COMBINE_RUN( pileup_done_ch, extract_done_ch )
+        COMBINE_RUN( pileup_files_ch, extract_files_ch )
     }
 
     // 7. OPTIONAL: run distance QC per sample, if requested
@@ -201,18 +205,25 @@ process COMBINE_RUN {
     tag "combine_run"
 
     input:
-    // dummy inputs just to make this run after upstream has finished
-    val pileup_meta_list
-    val extract_meta_list
+    // Use the actual upstream parquet outputs so combine depends on real workflow data
+    val pileup_files
+    val extract_files
 
     output:
     // a marker file so Nextflow knows this step ran
     path "combine_run.done"
 
     script:
+    def pileup_manifest = pileup_files.collect { it.toString() }.join('\n')
+    def extract_manifest = extract_files.collect { it.toString() }.join('\n')
     """
+    printf '%s\n' "${pileup_manifest}" > pileup_files.txt
+    printf '%s\n' "${extract_manifest}" > extract_files.txt
+
     combine_run.R \
-      --base-outdir ${outdir_abs}
+      --outdir ${outdir_abs} \
+      --pileup-list pileup_files.txt \
+      --extract-list extract_files.txt
 
     touch combine_run.done
     """

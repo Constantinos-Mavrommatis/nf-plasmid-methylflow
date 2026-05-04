@@ -1,4 +1,4 @@
-#!/home/constantinos/miniconda3/envs/nf-env/bin/Rscript
+#!/usr/bin/env Rscript
 
 suppressPackageStartupMessages({
   library(optparse)

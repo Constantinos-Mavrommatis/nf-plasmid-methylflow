@@ -1,4 +1,4 @@
-#!/home/constantinos/miniconda3/envs/nf-env/bin/Rscript
+#!/usr/bin/env Rscript
 
 suppressPackageStartupMessages({
   library(optparse)
@@ -233,5 +233,4 @@ p <- ggplot(by_sample, aes(nearest_d, frac_current_methylated, group = sample_id
 
 ggsave(out_plot, plot = p, width = 8, height = 6)
 cat("Wrote k-mer-based motif distance vs methylation plot:", out_plot, "\n")
-
 

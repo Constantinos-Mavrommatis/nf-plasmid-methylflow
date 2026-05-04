@@ -1,0 +1,4 @@
+- Add normalazation for comparing samples
+- Add quality control based on control groups
+- Have a differiential comparison between samples
+- 
